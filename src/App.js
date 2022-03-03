@@ -16,17 +16,17 @@ function App() {
         const fetchDetails = async () => {
             try {
                 await axios.post(ROUTES.auth, {}, { withCredentials: true })
+                navigate('/home')
                 setloginState({
                     loading: false,
                     loggedIn: true,
                 })
-                navigate('/home')
             } catch (e) {
+                navigate('/login')
                 setloginState({
                     loading: false,
                     loggedIn: false,
                 })
-                navigate('/login')
             }
         }
         fetchDetails()

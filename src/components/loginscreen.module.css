@@ -1,0 +1,24 @@
+.layout {
+    background-color: antiquewhite;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.formbox {
+    padding: 2rem;
+    width: 20rem;
+
+    background-color: azure;
+}
+
+.bottomtitle {
+    color: rgb(73, 73, 73);
+    display: flex;
+    cursor: pointer;
+    justify-content: center;
+}
+.buttonlayout {
+    display: flex;
+    justify-content: flex-end;
+}

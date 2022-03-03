@@ -1,0 +1,38 @@
+.layout {
+    background-color: rgb(240, 240, 240);
+    min-height: 100vh;
+}
+.formbox {
+    padding: 5rem;
+}
+
+.dialoglayout {
+    width: 30rem;
+    height: 29rem;
+    padding: 2rem;
+}
+.table {
+    margin: 2rem 0;
+}
+.table td,
+th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+.table tr:nth-child(even) {
+    background-color: #d6d6d6;
+}
+.cancel {
+    color: rgb(65, 65, 255);
+    float: right;
+    cursor: pointer;
+}
+.result {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 70%;
+}

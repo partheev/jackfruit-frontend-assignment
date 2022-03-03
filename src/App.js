@@ -1,25 +1,64 @@
-import logo from './logo.svg';
-import './App.css';
-
+import { Route, Routes, Navigate, useNavigate } from 'react-router-dom'
+import { LoginScreen } from './components/LoginScreen'
+import ReactLoading from 'react-loading'
+import { useEffect, useState } from 'react'
+import axios from 'axios'
+import { Box } from '@mui/system'
+import { ROUTES } from './routes'
+import { Home } from './components/Home.js'
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const navigate = useNavigate()
+    const [loginState, setloginState] = useState({
+        loading: true,
+        loggedIn: false,
+    })
+    useEffect(() => {
+        const fetchDetails = async () => {
+            try {
+                await axios.post(ROUTES.auth, {}, { withCredentials: true })
+                setloginState({
+                    loading: false,
+                    loggedIn: true,
+                })
+                navigate('/home')
+            } catch (e) {
+                setloginState({
+                    loading: false,
+                    loggedIn: false,
+                })
+                navigate('/login')
+            }
+        }
+        fetchDetails()
+    }, [])
+
+    return (
+        <div>
+            {loginState.loading ? (
+                <Box
+                    sx={{
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        minHeight: '100vh',
+                    }}
+                >
+                    <ReactLoading
+                        type={'spin'}
+                        color={'black'}
+                        height={'2rem'}
+                        width={'2rem'}
+                    />
+                </Box>
+            ) : (
+                <Routes>
+                    <Route path='/' element={<Navigate to='/home' />} />
+                    <Route path='/home' element={<Home />} />
+                    <Route path='/login' element={<LoginScreen />} />
+                </Routes>
+            )}
+        </div>
+    )
 }
 
-export default App;
+export default App
